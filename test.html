@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkyMate - Minecraft Schematics</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#0b0f14;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    a{
+      text-decoration:none;
+      color:white;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      width:100%;
+      height:80px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 70px;
+      position:fixed;
+      top:0;
+      z-index:999;
+      background:rgba(0,0,0,.4);
+      backdrop-filter:blur(10px);
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:700;
+      color:#57ff8a;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:35px;
+    }
+
+    .nav-links a{
+      color:#ddd;
+      transition:.3s;
+    }
+
+    .nav-links a:hover{
+      color:#57ff8a;
+    }
+
+    .btn{
+      background:#57ff8a;
+      color:black;
+      padding:12px 22px;
+      border-radius:12px;
+      font-weight:600;
+      transition:.3s;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 0 20px #57ff8a55;
+    }
+
+    /* HERO */
+
+    .hero{
+      width:100%;
+      min-height:100vh;
+      background:
+      linear-gradient(to bottom,rgba(0,0,0,.6),#0b0f14),
+      url('https://images.unsplash.com/photo-1627856014754-2907e2355d2f?q=80&w=1974&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      padding:150px 70px 80px;
+    }
+
+    .hero-content{
+      max-width:700px;
+    }
+
+    .hero h1{
+      font-size:72px;
+      line-height:1.1;
+      margin-bottom:20px;
+    }
+
+    .hero h1 span{
+      color:#57ff8a;
+    }
+
+    .hero p{
+      color:#bdbdbd;
+      line-height:1.8;
+      margin-bottom:40px;
+      font-size:18px;
+    }
+
+    /* SEARCH */
+
+    .search-box{
+      display:flex;
+      gap:15px;
+      background:#111822;
+      padding:15px;
+      border-radius:18px;
+      width:100%;
+      margin-top:30px;
+      border:1px solid #1f2937;
+    }
+
+    .search-box input{
+      flex:1;
+      background:none;
+      border:none;
+      outline:none;
+      color:white;
+      font-size:16px;
+    }
+
+    .search-btn{
+      background:#57ff8a;
+      color:black;
+      border:none;
+      padding:14px 25px;
+      border-radius:12px;
+      font-weight:600;
+      cursor:pointer;
+    }
+
+    /* CATEGORY */
+
+    .categories{
+      padding:50px 70px;
+    }
+
+    .section-title{
+      font-size:32px;
+      margin-bottom:30px;
+    }
+
+    .category-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:20px;
+    }
+
+    .category-card{
+      background:#111822;
+      padding:30px;
+      border-radius:20px;
+      transition:.3s;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+
+    .category-card:hover{
+      transform:translateY(-6px);
+      border-color:#57ff8a;
+      box-shadow:0 0 20px #57ff8a22;
+    }
+
+    .category-card h3{
+      margin-top:15px;
+      font-size:22px;
+    }
+
+    .category-card p{
+      color:#aaa;
+      margin-top:8px;
+    }
+
+    /* BUILDS */
+
+    .builds{
+      padding:40px 70px 100px;
+    }
+
+    .build-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:25px;
+    }
+
+    .build-card{
+      background:#111822;
+      border-radius:20px;
+      overflow:hidden;
+      transition:.3s;
+      border:1px solid #1f2937;
+    }
+
+    .build-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 0 25px #57ff8a22;
+    }
+
+    .build-card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .build-content{
+      padding:20px;
+    }
+
+    .build-content h3{
+      font-size:24px;
+      margin-bottom:10px;
+    }
+
+    .build-content p{
+      color:#aaa;
+      margin-bottom:20px;
+    }
+
+    .download-btn{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:12px;
+      background:#57ff8a;
+      color:black;
+      font-weight:700;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .download-btn:hover{
+      opacity:.9;
+    }
+
+    footer{
+      padding:30px;
+      text-align:center;
+      color:#777;
+      border-top:1px solid #1f2937;
+    }
+
+    @media(max-width:900px){
+
+      nav{
+        padding:0 25px;
+      }
+
+      .hero{
+        padding:140px 25px 70px;
+      }
+
+      .hero h1{
+        font-size:48px;
+      }
+
+      .categories,
+      .builds{
+        padding-left:25px;
+        padding-right:25px;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+
+    <div class="logo">SkyMate</div>
+
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Schematics</a>
+      <a href="#">Categories</a>
+      <a href="#">Trending</a>
+      <a href="#">Creators</a>
+    </div>
+
+    <a href="#" class="btn">Upload</a>
+
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>
+        Find.<br>
+        Build <span>Anything.</span>
+      </h1>
+
+      <p>
+        Discover and download the best Minecraft schematics
+        for farms, castles, storage systems and mega builds.
+      </p>
+
+      <div class="search-box">
+
+        <input type="text" placeholder="Search Iron Farm, Castle, Storage..." />
+
+        <button class="search-btn">
+          Search
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CATEGORIES -->
+
+  <section class="categories">
+
+    <h2 class="section-title">
+      Categories
+    </h2>
+
+    <div class="category-grid">
+
+      <div class="category-card">
+        <h3>🌾 Farms</h3>
+        <p>Iron, Gold, XP and Mob farms</p>
+      </div>
+
+      <div class="category-card">
+        <h3>🏠 Houses</h3>
+        <p>Modern and survival houses</p>
+      </div>
+
+      <div class="category-card">
+        <h3>🏰 Castles</h3>
+        <p>Fantasy mega builds</p>
+      </div>
+
+      <div class="category-card">
+        <h3>⚙️ Redstone</h3>
+        <p>Storage and mechanisms</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- BUILDS -->
+
+  <section class="builds">
+
+    <h2 class="section-title">
+      Trending Schematics
+    </h2>
+
+    <div class="build-grid">
+
+      <!-- CARD -->
+
+      <div class="build-card">
+
+        <img src="https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?q=80&w=1974&auto=format&fit=crop">
+
+        <div class="build-content">
+
+          <h3>Iron Farm</h3>
+
+          <p>
+            Efficient survival iron farm with high output.
+          </p>
+
+          <button class="download-btn">
+            Download
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="build-card">
+
+        <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1974&auto=format&fit=crop">
+
+        <div class="build-content">
+
+          <h3>Fantasy Castle</h3>
+
+          <p>
+            Massive medieval castle with detailed interiors.
+          </p>
+
+          <button class="download-btn">
+            Download
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div class="build-card">
+
+        <img src="https://images.unsplash.com/photo-1632501641765-e568d28b0015?q=80&w=1974&auto=format&fit=crop">
+
+        <div class="build-content">
+
+          <h3>Storage System</h3>
+
+          <p>
+            Automatic sorting and storage system schematic.
+          </p>
+
+          <button class="download-btn">
+            Download
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 SkyMate - Minecraft Schematics
+  </footer>
+
+</body>
+</html>
